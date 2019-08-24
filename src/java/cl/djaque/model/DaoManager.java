@@ -6,6 +6,7 @@
 package cl.djaque.model;
 
 import cl.djaque.beans.ComunaDto;
+import cl.djaque.beans.RegionComunaDto;
 import cl.djaque.beans.RegionDto;
 import cl.djaque.model.dao.MySqlComunaDao;
 import cl.djaque.model.dao.MySqlRegionDao;
@@ -34,5 +35,9 @@ public class DaoManager {
     
     public ComunaDto getComuna(int id) {
         return comunaDao.get(id);
+    }
+    
+    public List<RegionComunaDto> getAllRegionComuna(){
+        return regionDao.getAllRegionCommuna();
     }
 }

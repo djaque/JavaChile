@@ -5,6 +5,7 @@
  */
 package cl.djaque.model.dao;
 
+import cl.djaque.beans.RegionComunaDto;
 import cl.djaque.beans.RegionDto;
 import cl.djaque.model.db.MysqlConnection;
 import java.sql.Connection;
@@ -25,8 +26,18 @@ public class MySqlRegionDao {
     final String SELECTALL = "SELECT * FROM region";
     final String SELECTBYID = "SELECT * FROM region WHERE id = ?";
 
+    final String SELECTREGIONCOMUNA = "SELECT \n"
+            + "	r.id as regionId,\n"
+            + " r.name as regionName,\n"
+            + " c.id as comunaId,\n"
+            + " c.name as comunaName\n"
+            + "FROM chile.region r JOIN chile.comuna c \n"
+            + "WHERE r.id = c.idregion\n"
+            + ";";
+
     /**
      * Obtiene todos las regiones
+     *
      * @return List<RegionDto>
      */
     public List<RegionDto> getAll() {
@@ -63,6 +74,7 @@ public class MySqlRegionDao {
 
     /**
      * Obtiene una region por el ID
+     *
      * @param region id de la region
      * @return RegionDto
      */
@@ -95,5 +107,38 @@ public class MySqlRegionDao {
             }
         }
         return r;
+    }
+
+    public List<RegionComunaDto> getAllRegionCommuna() {
+        List<RegionComunaDto> lrc = new ArrayList<>();
+        Connection conn = null;
+        Statement ps = null;
+        try {
+            conn = MysqlConnection.open();
+            Statement stm = conn.createStatement();
+            ResultSet rs = stm.executeQuery(this.SELECTREGIONCOMUNA);
+            while (rs.next()) {
+                RegionComunaDto rc = new RegionComunaDto();
+                rc.setIdRegion(rs.getInt("regionId"));
+                rc.setIdComuna(rs.getInt("comunaId"));
+                rc.setNombreComuna(rs.getString("comunaName"));
+                rc.setNombreRegion(rs.getString("regionName"));
+                lrc.add(rc);
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error SQL" + ex.getMessage());
+        } finally {
+            try {
+                if (conn != null) {
+                    conn.close();
+                }
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException ex) {
+                System.out.println("Error Closing" + ex.getMessage());
+            }
+        }
+        return lrc;
     }
 }

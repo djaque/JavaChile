@@ -15,7 +15,7 @@
     </head>
     <body>
         <h1>Ingresar requerimiento</h1>
-        
+
         <form action="ChileController" method="get">
             <table>
                 <tr>
@@ -29,8 +29,8 @@
                                 </option>
                             </c:forEach>
                         </select>
-                        
- 
+
+
                     </td>
                 </tr>
                 <tr>
@@ -39,13 +39,15 @@
                         <select name="comunaId">
                             <option value="0">Seleccionar</option>
                             <c:forEach items="${requestScope.comunas}" var="item"> 
-                                <option value="${item.id}" ${requestScope.comunaId==item.id?"selected":""} >${item.name}</option>
+                                <option value="${item.id}" ${requestScope.comunaId==item.id?"selected":""} >
+                                    ${item.name}
+                                </option>
                             </c:forEach>
                         </select>
                     </td>
                 </tr>
-                
-                
+
+
             </table>
             <!--
                 Para cambiar de methodo usar Javascript
@@ -55,8 +57,29 @@
                 - Envia el formulario
                     this.form.submit()
             -->
-            <input type="button" value="Enviar" onclick="this.form.method='POST';this.form.submit()">
+            <input type="button"
+                   value="Enviar" 
+                   onclick="this.form.method = 'POST';this.form.submit()">
         </form>
-        
+
+
+        <table>
+            <tr>
+                <td>IdRegion</td>
+                <td>NombreRegion</td>
+                <td>IdComuna</td>
+                <td>NombreComuna</td>
+
+            </tr>
+            <c:forEach items="${requestScope.regionescomunas}" var="item"> 
+                <tr>
+                    <td>${item.idRegion}</td>
+                    <td>${item.nombreRegion}</td>
+                    <td>${item.idComuna}</td>
+                    <td>${item.nombreComuna}</td>
+                </tr>
+            </c:forEach>
+        </table>
+
     </body>
 </html>

@@ -26,15 +26,15 @@ public class MySqlRegionDao {
     final String SELECTALL = "SELECT * FROM region";
     final String SELECTBYID = "SELECT * FROM region WHERE id = ?";
 
-    final String SELECTREGIONCOMUNA = "SELECT \n"
-            + "	r.id as regionId,\n"
-            + " r.name as regionName,\n"
-            + " c.id as comunaId,\n"
-            + " c.name as comunaName\n"
-            + "FROM chile.region r JOIN chile.comuna c \n"
-            + "WHERE r.id = c.idregion\n"
-            + ";";
-
+    final String SELECTREGIONCOMUNA = ""
+            + "SELECT "
+            + "	r.id as regionId, "
+            + " r.name as regionName, "
+            + " c.id as comunaId, "
+            + " c.name as comunaName "
+            + "FROM chile.region r, chile.comuna c "
+            + "WHERE r.id = c.idregion ";
+            
     /**
      * Obtiene todos las regiones
      *

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Aug 22, 2019 at 01:22 PM
+-- Generation Time: Aug 24, 2019 at 12:51 PM
 -- Server version: 5.7.26
 -- PHP Version: 7.3.7
 
@@ -294,7 +294,7 @@ INSERT INTO `comuna` (`id`, `idregion`, `name`) VALUES
 (261, 11, 'Cisnes'),
 (262, 11, 'Guaitecas'),
 (263, 11, 'Cochrane'),
-(264, 11, 'O\'Higgins'),
+(264, 11, 'OHiggins'),
 (265, 11, 'Tortel'),
 (266, 11, 'Chile Chico'),
 (267, 11, 'Río Ibáñez'),
@@ -378,6 +378,38 @@ INSERT INTO `comuna` (`id`, `idregion`, `name`) VALUES
 (345, 15, 'Putre'),
 (346, 15, 'General Lagos');
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `region`
+--
+
+CREATE TABLE `region` (
+  `id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `region`
+--
+
+INSERT INTO `region` (`id`, `name`) VALUES
+(1, 'Tarapacá'),
+(2, 'Antofagasta'),
+(3, 'Atacama'),
+(4, 'Coquimbo'),
+(5, 'Valparaíso'),
+(6, 'Libertador General Bernardo OHiggins'),
+(7, 'Maule'),
+(8, 'Biobío'),
+(9, 'La Araucanía'),
+(10, 'Los Lagos'),
+(11, 'Aysén del General Carlos Ibañez del Campo'),
+(12, 'Magallanes y de la Antartica Chilena'),
+(13, 'Metropolitana de Santiago'),
+(14, 'Los Ríos'),
+(15, 'Arica y Parinacota');
+
 --
 -- Indexes for dumped tables
 --
@@ -388,6 +420,12 @@ INSERT INTO `comuna` (`id`, `idregion`, `name`) VALUES
 ALTER TABLE `comuna`
   ADD PRIMARY KEY (`id`),
   ADD KEY `fk_region` (`idregion`);
+
+--
+-- Indexes for table `region`
+--
+ALTER TABLE `region`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -407,4 +445,7 @@ ALTER TABLE `comuna`
 -- Constraints for table `comuna`
 --
 ALTER TABLE `comuna`
-  ADD CONSTRAINT `fk_region` FOREIGN KEY (`idregion`) REFERENCES `region` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `fk_region` 
+    FOREIGN KEY (`idregion`) 
+    REFERENCES `region` (`id`) 
+    ON DELETE NO ACTION ON UPDATE NO ACTION;

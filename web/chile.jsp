@@ -71,7 +71,7 @@
                 <td>NombreComuna</td>
 
             </tr>
-            <c:forEach items="${requestScope.regionescomunas}" var="item"> 
+            <c:forEach items="${requestScope.filteredRegCom}" var="item"> 
                 <tr>
                     <td>${item.idRegion}</td>
                     <td>${item.nombreRegion}</td>

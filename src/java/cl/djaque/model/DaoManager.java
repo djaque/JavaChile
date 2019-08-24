@@ -17,27 +17,32 @@ import java.util.List;
  * @author dany
  */
 public class DaoManager {
-    
+
     private final MySqlRegionDao regionDao = new MySqlRegionDao();
     private final MySqlComunaDao comunaDao = new MySqlComunaDao();
-    
-    public List<RegionDto> getRegiones(){
+
+    public List<RegionDto> getRegiones() {
         return regionDao.getAll();
     }
-    
+
     public RegionDto getRegion(int id) {
         return regionDao.get(id);
     }
-    
-    public List<ComunaDto> getComunas(int region){
+
+    public List<ComunaDto> getComunas(int region) {
         return comunaDao.getByRegion(region);
     }
-    
+
     public ComunaDto getComuna(int id) {
         return comunaDao.get(id);
     }
-    
-    public List<RegionComunaDto> getAllRegionComuna(){
+
+    public List<RegionComunaDto> getAllRegionComuna() {
         return regionDao.getAllRegionCommuna();
+    }
+    
+    
+    public List<RegionComunaDto> getRegionComuna(int idRegion) {
+        return regionDao.getRegionCommuna(idRegion);
     }
 }

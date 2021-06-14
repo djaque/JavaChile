@@ -41,6 +41,10 @@ public class ChileController extends HttpServlet {
             int id = Integer.parseInt(regionId);
             List<ComunaDto> comunas = dm.getComunas(id);
             request.setAttribute("comunas", comunas);
+            
+            // Obtiene RegionComunaDto filtrando por region
+            List<RegionComunaDto> listRegionComuna = dm.getRegionComuna(id);
+            request.setAttribute("filteredRegCom", listRegionComuna);
         }
 
         // Obtengo otros campos solo para persistencia
